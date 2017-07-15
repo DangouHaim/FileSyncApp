@@ -3,7 +3,7 @@
     <group android:id="@+id/main_menu_group">
         <item
             android:id="@+id/main_menu_file"
-            android:title="File">
+            android:title="@string/file">
         </item>
     </group>
 </menu>

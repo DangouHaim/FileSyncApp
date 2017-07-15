@@ -1,4 +1,4 @@
-package com.example.dangou.myapplication;
+package com.example.dangou.filesync;
 
 import org.junit.Test;
 

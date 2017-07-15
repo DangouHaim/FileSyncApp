@@ -1,4 +1,4 @@
-package com.example.dangou.myapplication;
+package com.example.dangou.filesync;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.dangou.myapplication", appContext.getPackageName());
+        assertEquals("com.example.dangou.filesync", appContext.getPackageName());
     }
 }

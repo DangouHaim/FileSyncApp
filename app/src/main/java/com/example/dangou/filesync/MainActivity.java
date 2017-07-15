@@ -1,4 +1,4 @@
-package com.example.dangou.myapplication;
+package com.example.dangou.filesync;
 
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.dangou.filesync.R;
 
 import java.io.File;
 import java.io.FileInputStream;
