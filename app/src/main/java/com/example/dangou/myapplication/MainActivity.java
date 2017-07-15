@@ -324,10 +324,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("1");
-        menu.add("2");
-        menu.add("3");
-        menu.add("4");
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        menu.setGroupVisible(R.id.main_menu_group, false);
         return super.onCreateOptionsMenu(menu);
     }
 
