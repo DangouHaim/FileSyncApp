@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:text="@string/defaultIP"
-        android:inputType="date" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/outText"
