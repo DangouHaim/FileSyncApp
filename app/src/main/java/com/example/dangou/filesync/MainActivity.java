@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 res += "file : size : " + getSize(inFile.length()) + " : " + inFile.toString() + "\n";
             }
             else {
-                res += "folder : " + inFile.toString() + "\n";
+                res += "ic_launcher : " + inFile.toString() + "\n";
             }
         }
         return res;
